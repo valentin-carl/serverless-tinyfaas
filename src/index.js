@@ -8,7 +8,7 @@ class TinyFaaSPlugin {
             "initialize": () => this.initialize(),
             "before:deploy:deploy": () => this.beforeDeploy(),
             "after:deploy:deploy": () => this.afterDeploy()
-        }
+        };
     }
 
     // load the tinyfaas configuration from serverless.yml
@@ -23,7 +23,48 @@ class TinyFaaSPlugin {
     // POST them to the tinyfaas nodes
     beforeDeploy() {
         console.log("trying to deploy functions to tinyFaaS nodes.");
-        // TODO 
+
+        //
+        // TODO this will not (yet) work!! has to be adapted to consider values in this.tfconfig
+        //
+
+        // input parameters for the rest of the program
+        let tinyFaaSURL = "http://localhost:8080/upload";
+        let functionName = "echo";
+        let env = "nodejs";
+        let threads = 1;
+
+        // the tmp dir is used to dump data that isn't supposed to end up in git
+        // constents from that directory can be safely deleted
+        ensureTmpDirExists();
+
+        // compress the function code into a zip
+        createZip("./data", "out.zip", () => {
+
+            // encode the zip in base64
+            let functionBase64 = encode(tmpDir + "/out.zip");
+
+            // send upload request
+            let req = new XMLHttpRequest();
+            req.open("POST", tinyFaaSURL);
+            req.onreadystatechange = () => {
+                console.log("ready state changed to " + req.readyState);
+                if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
+                    console.log("request sucessfull");
+                }
+            }
+            let payload = JSON.stringify({
+                "name": functionName,
+                "env": env,
+                "threads": threads,
+                "zip": functionBase64
+            });
+            console.log(payload);
+            req.send(payload);
+
+            // remove the tmp directory after request has been sent
+            clearTmp(true, true);
+        });
     }
 
     // verify that all functions have been deployed to the correct nodes

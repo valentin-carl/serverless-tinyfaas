@@ -9,7 +9,9 @@
   "author": "Valentin Carl",
   "homepage": "https://github.com/valentin-carl/serverless-tinyfaas#readme",
   "dependencies": {
-    "serverless-tinyfaas": "^1.0.1"
+    "archiver": "^6.0.1",
+    "serverless-tinyfaas": "^1.0.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "peerDependencies": {
     "serverless": "^3.38.0"
