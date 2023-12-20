@@ -10,5 +10,8 @@
   "homepage": "https://github.com/valentin-carl/serverless-tinyfaas#readme",
   "dependencies": {
     "serverless-tinyfaas": "^1.0.1"
+  },
+  "peerDependencies": {
+    "serverless": "^3.38.0"
   }
 }
