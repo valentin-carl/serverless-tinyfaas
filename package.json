@@ -1,0 +1,8 @@
+{
+  "name": "serverless-tinyfaas",
+  "version": "1.0.0",
+  "description": "A plugin for the serverless project to deploy functions to tinyFaaS instances",
+  "main": "index.js",
+  "author": "Valentin Carl",
+  "homepage": "https://github.com/valentin-carl/serverless-tinyfaas#readme"
+}
