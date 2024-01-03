@@ -132,3 +132,4 @@ dist
 # my additions
 tmp
 .DS_Store
+.idea
