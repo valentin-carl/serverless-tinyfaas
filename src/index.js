@@ -101,7 +101,7 @@ class TinyFaaSPlugin {
         // the tmp directory is used to store the zips of function to be deployed to the tinyFaaS instances
         ensureTmpDirExists();
 
-        // deploy all tinyFaaS function to their specified nodes
+        // deploy all tinyFaaS functions to their specified nodes
         this.tfconfig.functions.forEach(f => {
             console.log(`attempting to deploy ${f.name} to ${f.deployTo}`);
             createZip(f.source, `${f.name}.zip`, () => {
