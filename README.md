@@ -11,7 +11,10 @@ Assuming the serverless framework is already installed, you just need to get thi
 ```shell
 npm i serverless-tinyfaas
 ```
-Next, add your tinyFaaS functions and nodes to the `serverless.yml`. Here's an example configuration. This can be appended to an existing `serverless.yml` to combine the tinyFaaS functions with other providers.
+Next, add your tinyFaaS functions and nodes to the `serverless.yml`. 
+Here's an example configuration. 
+This can be appended to an existing `serverless.yml` to combine the tinyFaaS functions with other providers.
+Note that the provider and service fields have no meaning for tinyFaaS; they're just required for the serverless framework to not throw any errors while deploying.
 
 ```yaml
 custom:
@@ -30,6 +33,11 @@ custom:
 
 plugins:
   - serverless-tinyfaas
+
+provider:
+  name: "aws"
+
+service: "my-service"
 ```
 
 Now, run the following command to deploy your functions to your tinyFaaS nodes.
